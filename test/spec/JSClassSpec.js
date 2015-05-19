@@ -120,10 +120,12 @@ describe('JSClass', function(){
 		var properties;
 		var SomeClass;
 		var SomeOtherClass;
+		var ClassWithOptions;
 		var someObj;
 		var someObj2;
 		var someOtherObj;
 		var someOtherObj2;
+		var objWithOptions;
 
 		beforeEach(function(){
 			properties = {
@@ -136,10 +138,18 @@ describe('JSClass', function(){
 				SOME_STATIC_VARIABLE : 'A',
 				other : 'x'
 			});
+			ClassWithOptions = JSClass.extend({
+				SOME_STATIC_VARIABLE : 'INIT',
+				other : 'ial'
+			});
 			someObj = new SomeClass();
 			someObj2 = new SomeClass();
 			someOtherObj = new SomeOtherClass();
 			someOtherObj2 = new SomeOtherClass();
+			objWithOptions = new ClassWithOptions({
+				SOME_STATIC_VARIABLE : 'OPT',
+				other : 'ion'
+			});
 		});
 
 		it('should be able to extend properties', function(){
@@ -215,6 +225,11 @@ describe('JSClass', function(){
 
 			expect(someOtherObj.other).toEqual('s3');
 			expect(someOtherObj2.other).toEqual('s4');
+		});
+
+		it('should be able to override properties using options', function(){
+			expect(objWithOptions.constructor.SOME_STATIC_VARIABLE).toEqual('OPT');
+			expect(objWithOptions.other).toEqual('ion');
 		});
 	});
 });
