@@ -2,8 +2,7 @@ describe('JSClass', function(){
 	var JSClass;
 
 	beforeEach(function(){
-		var context = typeof window == 'undefined' &&  typeof exports == 'object'? exports : window;
-		JSClass = context.JSClass;
+		JSClass = window.JSClass;
 	});
 
 	it('should be exist', function(){
