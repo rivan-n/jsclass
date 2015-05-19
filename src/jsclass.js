@@ -101,7 +101,7 @@
 		 * @param {String} property
 		 * @return {?} value of property;
 		 */
-		get : function(property){
+		__get : function(property){
 			var ctx = this.constructor.defineContext(this, property);
 			return ctx[property];
 		},
@@ -110,7 +110,7 @@
 		 * @param {String|Object} properties
 		 * @param {?} value [optional]
 		 */
-		set : function(properties, value){
+		__set : function(properties, value){
 			if(typeof properties === 'string'){
 				var ctx = this.constructor.defineContext(this, properties);
 				ctx[properties] = value;
