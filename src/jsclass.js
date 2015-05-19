@@ -79,7 +79,14 @@
 		 * @return {Function} base;
 		 */
 		extend : function(properties){
-			var base = function(options){if(this.init){this.init.apply(this, arguments);}};
+			var base = function(options){
+				if(this.copy){
+					this.copy(this, options);
+				}
+				if(this.init){
+					this.init.apply(this, arguments);
+				}
+			};
 			this.copy(base, this);
 			this.copy(base.prototype, this.prototype);
 			this.copy(base.prototype, properties);
@@ -115,13 +122,13 @@
 	});
 
 	//export module
-	var context = typeof window == 'undefined' &&  typeof exports == 'object'? exports : null;
-
-	if(context){
-		module.exports = Class;
+	if(typeof window == 'undefined'){
+		if(typeof exports == 'object'){
+			module.exports = Class;
+		}
 	}
 	else{
-		context['JSClass'] = Class;
+		window['JSClass'] = Class;
 	}
 
 	if ( typeof define === "function" && define.amd ) {
