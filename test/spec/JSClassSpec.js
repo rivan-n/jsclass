@@ -152,19 +152,19 @@ describe('JSClass', function(){
 		});
 
 		it('should be able to get properties', function(){
-			expect(someObj.get('SOME_STATIC_VARIABLE')).toEqual(properties.SOME_STATIC_VARIABLE);
-			expect(someObj.get('other')).toEqual(properties.other);
+			expect(someObj.__get('SOME_STATIC_VARIABLE')).toEqual(properties.SOME_STATIC_VARIABLE);
+			expect(someObj.__get('other')).toEqual(properties.other);
 		});
 
 		it('should be able to set properties', function(){
-			someObj.set('other', 'x');
-			expect(someObj.get('other')).toEqual('x');
-			someObj.set({other:'y'});
-			expect(someObj.get('other')).toEqual('y');
-			someObj.set('SOME_STATIC_VARIABLE', 3);
-			expect(someObj.get('SOME_STATIC_VARIABLE')).toEqual(3);
-			someObj.set({SOME_STATIC_VARIABLE : 4});
-			expect(someObj.get('SOME_STATIC_VARIABLE')).toEqual(4);
+			someObj.__set('other', 'x');
+			expect(someObj.__get('other')).toEqual('x');
+			someObj.__set({other:'y'});
+			expect(someObj.__get('other')).toEqual('y');
+			someObj.__set('SOME_STATIC_VARIABLE', 3);
+			expect(someObj.__get('SOME_STATIC_VARIABLE')).toEqual(3);
+			someObj.__set({SOME_STATIC_VARIABLE : 4});
+			expect(someObj.__get('SOME_STATIC_VARIABLE')).toEqual(4);
 		});
 
 		it('should be able to override properties', function(){
@@ -180,7 +180,7 @@ describe('JSClass', function(){
 			expect(someObj.constructor.SOME_STATIC_VARIABLE).toEqual(5);
 			expect(someObj2.constructor.SOME_STATIC_VARIABLE).toEqual(5);
 
-			someObj.set('SOME_STATIC_VARIABLE', 3);
+			someObj.__set('SOME_STATIC_VARIABLE', 3);
 
 			expect(SomeClass.SOME_STATIC_VARIABLE).toEqual(3);
 			expect(someObj.constructor.SOME_STATIC_VARIABLE).toEqual(3);
@@ -190,7 +190,7 @@ describe('JSClass', function(){
 			expect(someOtherObj.constructor.SOME_STATIC_VARIABLE).toEqual('A');
 			expect(someOtherObj2.constructor.SOME_STATIC_VARIABLE).toEqual('A');
 
-			SomeOtherClass.prototype.set('SOME_STATIC_VARIABLE', 'B');
+			SomeOtherClass.prototype.__set('SOME_STATIC_VARIABLE', 'B');
 
 			expect(SomeOtherClass.SOME_STATIC_VARIABLE).toEqual('B');
 			expect(someOtherObj.constructor.SOME_STATIC_VARIABLE).toEqual('B');
@@ -201,8 +201,8 @@ describe('JSClass', function(){
 			expect(someObj.other).toEqual('o');
 			expect(someObj2.other).toEqual('o');
 
-			someObj.set('other', 's1');
-			someObj2.set('other', 's2');
+			someObj.__set('other', 's1');
+			someObj2.__set('other', 's2');
 
 			expect(someObj.other).toEqual('s1');
 			expect(someObj2.other).toEqual('s2');
@@ -210,8 +210,8 @@ describe('JSClass', function(){
 			expect(someOtherObj.other).toEqual('x');
 			expect(someOtherObj2.other).toEqual('x');
 
-			someOtherObj.set('other', 's3');
-			someOtherObj2.set('other', 's4');
+			someOtherObj.__set('other', 's3');
+			someOtherObj2.__set('other', 's4');
 
 			expect(someOtherObj.other).toEqual('s3');
 			expect(someOtherObj2.other).toEqual('s4');
