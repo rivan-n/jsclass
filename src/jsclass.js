@@ -88,9 +88,7 @@
 		}
 	};
 
-	//export module
-	var context = typeof window == 'undefined' &&  typeof exports == 'object'? exports : window;
-	context['JSClass'] = JSClass.extend({
+	var Class = JSClass.extend({
 		/*
 		 * Public
 		 * @param {String} property
@@ -115,6 +113,22 @@
 			}
 		}
 	});
+
+	//export module
+	var context = typeof window == 'undefined' &&  typeof exports == 'object'? exports : null;
+
+	if(context){
+		module.exports = Class;
+	}
+	else{
+		context['JSClass'] = Class;
+	}
+
+	if ( typeof define === "function" && define.amd ) {
+		define('jsclass', [], function() {
+			return Class;
+		});
+	}
 })();
 
 /**********Array indexOf Polyfill**********/
