@@ -80,8 +80,8 @@
 		 */
 		extend : function(properties){
 			var base = function(options){
-				if(this.copy){
-					this.copy(this, options);
+				if(options){
+					this.constructor.copy(this, options);
 				}
 				if(this.init){
 					this.init.apply(this, arguments);
